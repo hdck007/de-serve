@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: YourContract
-    network: localhost
+    network: moonbeamDevNode 
     source:
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
       abi: YourContract
@@ -18,7 +18,7 @@ dataSources:
         - Sender
       abis:
         - name: YourContract
-          file: ./abis/localhost_YourContract.json
+          file: ./abis/moonbeamDevNode_YourContract.json
       eventHandlers:
         - event: SetPurpose(address,string)
           handler: handleSetPurpose

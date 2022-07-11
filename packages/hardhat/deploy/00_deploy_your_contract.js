@@ -2,7 +2,7 @@
 
 const { ethers } = require("hardhat");
 
-const localChainId = "31337";
+const localChainId = "1281";
 
 // const sleep = (ms) =>
 //   new Promise((r) =>
@@ -15,6 +15,7 @@ const localChainId = "31337";
 module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
+  console.log(deployer);
   const chainId = await getChainId();
 
   await deploy("YourContract", {
