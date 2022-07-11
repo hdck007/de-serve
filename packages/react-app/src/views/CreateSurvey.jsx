@@ -77,26 +77,11 @@ export default function CreateSurvey({ signer, name, provider, contractConfig, c
     if (gasPrice) {
       overrides.gasPrice = gasPrice;
     }
-    // Uncomment this if you want to skip the gas estimation for each transaction
-    // overrides.gasLimit = hexlify(1200000);
 
-    const blob = new Blob([JSON.stringify(formState)], { type: "application/json" });
-    const formData = new FormData();
-    const file = new File([blob], "survey.json");
-    formData.append("file", blob);
-    const data = await fetch("https://api.web3.storage/upload", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDE1NUU1Q0Y1ZDVkZGE2NjE4NDBjNzQ0QTIyMGVhYjIzYmJBMDBkODMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDA0NDkwMzc3MzEsIm5hbWUiOiJ0aGV0b2tlbiJ9.t5eXvRQ9dyIagh8_EiHCSEXOGKSvuqe1hrmCu1r_xl0`,
-      },
-    }).then(res => res.json());
-    console.debug(data);
-    // const returned = await tx(addSurvey(title, JSON.stringify(formState), overrides));
-    // if (returned) {
-    // history.push("/", { replace: true });
-    // }
+    const returned = await tx(addSurvey(title, JSON.stringify(formState), overrides));
+    if (returned) {
+      history.push("/", { replace: true });
+    }
   };
 
   const handleAddTextInput = () => {
