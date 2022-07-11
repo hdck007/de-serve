@@ -21,6 +21,7 @@ import { Web3ModalSetup } from "./helpers";
 import { Home } from "./views";
 import CreateSurvey from "./views/CreateSurvey";
 import Survey from "./views/Survey";
+import MySurveys from "./views/MySurveys";
 import { useStaticJsonRPC } from "./hooks";
 import RespondPage from "./views/RespondPage";
 const { ethers } = require("ethers");
@@ -187,6 +188,9 @@ function App(props) {
         <Menu.Item key="/create-survey">
           <Link to="/create-survey">create survey</Link>
         </Menu.Item>
+        <Menu.Item key="/my-surveys">
+          <Link to="/my-surveys">my survey</Link>
+        </Menu.Item>
         {/* <Menu.Item key="/debug">
           <Link to="/debug">Debug Contracts</Link>
         </Menu.Item> */}
@@ -207,7 +211,7 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home name="YourContract" contractConfig={contractConfig} provider={localProvider} />
+          <Home name="Surveys" contractConfig={contractConfig} provider={localProvider} />
         </Route>
         <Route exact path="/debug">
           {/*
@@ -217,7 +221,7 @@ function App(props) {
             */}
 
           <Contract
-            name="YourContract"
+            name="Surveys"
             price={price}
             signer={userSigner}
             provider={localProvider}
@@ -227,23 +231,16 @@ function App(props) {
           />
         </Route>
         <Route exact path="/create-survey">
-          <CreateSurvey
-            signer={userSigner}
-            name="YourContract"
-            contractConfig={contractConfig}
-            provider={localProvider}
-          />
+          <CreateSurvey signer={userSigner} name="Surveys" contractConfig={contractConfig} provider={localProvider} />
         </Route>
         <Route exact path="/survey/:id">
-          <Survey signer={userSigner} name="YourContract" contractConfig={contractConfig} provider={localProvider} />
+          <Survey signer={userSigner} name="Surveys" contractConfig={contractConfig} provider={localProvider} />
         </Route>
         <Route exact path="/respond/:id">
-          <RespondPage
-            signer={userSigner}
-            name="YourContract"
-            contractConfig={contractConfig}
-            provider={localProvider}
-          />
+          <RespondPage signer={userSigner} name="Surveys" contractConfig={contractConfig} provider={localProvider} />
+        </Route>
+        <Route exact path="/my-surveys">
+          <MySurveys signer={userSigner} name="Surveys" contractConfig={contractConfig} provider={localProvider} />
         </Route>
         {/* <Route path="/hints">
           <Hints

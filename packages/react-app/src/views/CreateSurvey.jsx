@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Checkbox, Input } from "antd";
 import React from "react";
 import { Dropdown, Menu, Space } from "antd";
 import MenuItem from "antd/lib/menu/MenuItem";
@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 export default function CreateSurvey({ signer, name, provider, contractConfig, chainId, gasPrice, contractFunction }) {
   const [formState, setFormState] = React.useState([]);
   const [title, setTitle] = React.useState("");
+  const [isFree, setIsFree] = React.useState(false);
   const [txValue, setTxValue] = React.useState();
   const history = useHistory();
   const tx = Transactor(provider, gasPrice);
@@ -78,7 +79,7 @@ export default function CreateSurvey({ signer, name, provider, contractConfig, c
       overrides.gasPrice = gasPrice;
     }
 
-    const returned = await tx(addSurvey(title, JSON.stringify(formState), overrides));
+    const returned = await tx(addSurvey(title, JSON.stringify(formState), isFree, overrides));
     if (returned) {
       history.push("/", { replace: true });
     }
@@ -215,6 +216,14 @@ export default function CreateSurvey({ signer, name, provider, contractConfig, c
           </Space>
         </Dropdown>
       </div>
+      <span>
+        is this survey free? &nbsp;&nbsp;
+        <Checkbox value={isFree} onChange={e => setIsFree(e.target.checked)}>
+          {isFree ? "yes" : "no"}
+        </Checkbox>
+      </span>
+      <br />
+      <br />
       <Button
         style={{
           width: "200px",

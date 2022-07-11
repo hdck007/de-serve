@@ -3,11 +3,11 @@ schema:
   file: ./src/schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: YourContract
+    name: Surveys
     network: moonbeamDevNode 
     source:
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-      abi: YourContract
+      abi: Surveys
       startBlock: 1
     mapping:
       kind: ethereum/events
@@ -17,8 +17,8 @@ dataSources:
         - Purpose
         - Sender
       abis:
-        - name: YourContract
-          file: ./abis/moonbeamDevNode_YourContract.json
+        - name: Surveys
+          file: ./abis/moonbeamDevNode_Surveys.json
       eventHandlers:
         - event: SetPurpose(address,string)
           handler: handleSetPurpose

@@ -24,9 +24,9 @@ export default function RespondPage({ signer, name, provider, contractConfig, ch
   React.useEffect(() => {
     if (!contract) return;
     contract.getSurvey(Number(id)).then(data => {
-      setSurvey(JSON.parse(data[1]));
-      setAnswer(survey.map(item => ""));
-      setSurveyTitle(data[0]);
+      setSurvey(JSON.parse(data[4]));
+      setAnswer(JSON.parse(data[4]).map(item => ""));
+      setSurveyTitle(data[3]);
     });
   }, [contracts]);
 
