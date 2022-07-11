@@ -141,6 +141,7 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
           //ignore
         }
 
+        console.error(e);
         notification.error({
           message: "Transaction Error",
           description: message,
